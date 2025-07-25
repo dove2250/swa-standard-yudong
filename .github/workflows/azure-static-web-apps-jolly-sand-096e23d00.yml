@@ -22,6 +22,16 @@ jobs:
         with:
           submodules: true
           lfs: false
+      
+      - name: Cleanup stray node_modules if any
+        run: |
+          if [ -d node_modules ]; then
+            echo "Removing stray node_modules/"
+            rm -rf node_modules
+          else
+            echo "No node_modules/ to remove"
+          fi
+      
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
       - name: Get Id Token
